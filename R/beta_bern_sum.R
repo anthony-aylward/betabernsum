@@ -226,12 +226,12 @@ bbs_test <- function(
   ...
 ) {
   dist_val <- pbbs(
-    x,
+    q = x,
     size = size,
     prob = prob,
     rho = rho,
     shape1 = shape1,
-    shape2 = shape2,
+    shape2 = shape2
   )
   if (alternative == "two_sided") {
     p_value <- min(1, 2 * min(dist_val, 1 - dist_val))
