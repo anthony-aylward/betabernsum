@@ -67,7 +67,7 @@ density_of_sum_prob_rho <- function(x, size, prob = 0.5, rho = 0, ...) {
 density_of_sum_shape1_shape2 <- function(x, size, shape1, shape2, ...) {
   if (length(shape1) == 1) shape1 <- rep(shape1, 2)
   if (length(shape2) == 1) shape2 <- rep(shape2, 2)
-  if (!all(c(size, shape1, shape2 == 2)) stop("bad argument lengths")
+  if (!all(c(size, shape1, shape2) == 2)) stop("bad argument lengths")
   sum(
     apply(
       region(x, size),
@@ -102,7 +102,7 @@ density_of_sum_shape1_shape2 <- function(x, size, shape1, shape2, ...) {
 density_of_sum_prob_shape1 <- function(x, size, prob, shape1, ...) {
   if (length(prob) == 1) prob <- rep(prob, 2)
   if (length(shape1) == 1) shape1 <- rep(shape1, 2)
-  if (!all(c(size, prob, shape1 == 2)) stop("bad argument lengths")
+  if (!all(c(size, prob, shape1) == 2)) stop("bad argument lengths")
   sum(
     apply(
       region(x, size),
