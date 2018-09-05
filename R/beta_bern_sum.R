@@ -163,3 +163,41 @@ dbbs <- function(
     stop("Invalid arguments")
   }
 }
+
+#' @title Distribution function for a sum of beta-bernoulli variables
+#'
+#' @param q vector of quantiles.
+#' @param size vector giving the number of trials for each group.
+#' @param prob vector giving probability of success for each group.
+#' @param rho vector giving correlation parameter for each group.
+#' @param shape1,shape2 the two (positive) shape parameters of the standard
+#'   beta distribution. See the documentation for \code{Betabinom} in the
+#'   \code{VGAM} package.
+#' @param ... other parameters passed to \code{Betabinom}
+#' @export
+pbbs <- function(
+  q,
+  size,
+  prob = 0.5,
+  rho = 0,
+  shape1 = NULL,
+  shape2 = NULL,
+  ...
+) {
+  sum(
+    sapply(
+      0:q,
+      function(x) {
+        dbbs(
+          x,
+          size = size,
+          prob = prob,
+          rho = rho,
+          shape1 = shape1,
+          shape2 = shape2,
+          ...
+        )
+      }
+    )
+  )
+}
