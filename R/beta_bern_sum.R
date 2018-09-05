@@ -16,9 +16,7 @@
 #' @param x number of successes
 #' @param size vector giving the number of trials for each group.
 region <- function(x, size) {
-  if (x < 0 || x > sum(size)) {
-    stop("provided x is out of bounds")
-  }
+  if (x < 0 || x > sum(size)) stop("provided x is out of bounds")
   coord1 <- min(0, x - size[[2]]):min(x, size[[1]])
   cbind(coord1, x - coord1)
 }
@@ -31,6 +29,9 @@ region <- function(x, size) {
 #' @param rho vector giving correlation parameter for each group.
 #' @param ... other parameters passed to dbetabinom
 density_of_sum_prob_rho <- function(x, size, prob = 0.5, rho = 0, ...) {
+  if (length(prob) == 1) prob <- rep(prob, 2)
+  if (length(rho) == 1) rho <- rep(rho, 2)
+  if (!all(c(size, prob, rho) == 2)) stop("bad argument lengths")
   sum(
     apply(
       region(x, size),
@@ -64,6 +65,9 @@ density_of_sum_prob_rho <- function(x, size, prob = 0.5, rho = 0, ...) {
 #'   \code{VGAM} package.
 #' @param ... other parameters passed to dbetabinom.ab
 density_of_sum_shape1_shape2 <- function(x, size, shape1, shape2, ...) {
+  if (length(shape1) == 1) shape1 <- rep(shape1, 2)
+  if (length(shape2) == 1) shape2 <- rep(shape2, 2)
+  if (!all(c(size, shape1, shape2 == 2)) stop("bad argument lengths")
   sum(
     apply(
       region(x, size),
@@ -96,6 +100,9 @@ density_of_sum_shape1_shape2 <- function(x, size, shape1, shape2, ...) {
 #' @param shape1 vector giving correlation parameter for each group.
 #' @param ... other parameters passed to dbetabinom.ab
 density_of_sum_prob_shape1 <- function(x, size, prob, shape1, ...) {
+  if (length(prob) == 1) prob <- rep(prob, 2)
+  if (length(shape1) == 1) shape1 <- rep(shape1, 2)
+  if (!all(c(size, prob, shape1 == 2)) stop("bad argument lengths")
   sum(
     apply(
       region(x, size),
