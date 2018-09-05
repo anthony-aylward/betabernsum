@@ -233,11 +233,11 @@ bbs_test <- function(
     shape1 = shape1,
     shape2 = shape2
   )
-  if (alternative == "two_sided") {
+  if (alternative[[1]] == "two_sided") {
     p_value <- min(1, 2 * min(dist_val, 1 - dist_val))
-  } else if (alternative == "less") {
+  } else if (alternative[[1]] == "less") {
     p_value <- dist_val
-  } else if (alternative == "greater") {
+  } else if (alternative[[1]] == "greater") {
     p_value <- 1 - dist_val
   }
   list(
