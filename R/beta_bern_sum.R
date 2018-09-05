@@ -31,6 +31,9 @@ region <- function(x, size) {
 density_of_sum_prob_rho <- function(x, size, prob = 0.5, rho = 0, ...) {
   if (length(prob) == 1) prob <- rep(prob, 2)
   if (length(rho) == 1) rho <- rep(rho, 2)
+  print(size)
+  print(prob)
+  print(rho)
   if (!all(c(size, prob, rho) == 2)) stop("bad argument lengths")
   sum(
     apply(
