@@ -199,21 +199,26 @@ pbbs <- function(
   shape2 = NULL,
   ...
 ) {
-  sum(
-    sapply(
-      0:q,
-      function(x) {
-        dbbs(
-          x,
-          size = size,
-          prob = prob,
-          rho = rho,
-          shape1 = shape1,
-          shape2 = shape2,
-          ...
+  sapply(
+    q,
+    function(q_i) {
+      sum(
+        sapply(
+          0:q,
+          function(x) {
+            dbbs(
+              x,
+              size = size,
+              prob = prob,
+              rho = rho,
+              shape1 = shape1,
+              shape2 = shape2,
+              ...
+            )
+          }
         )
-      }
-    )
+      )
+    }
   )
 }
 
