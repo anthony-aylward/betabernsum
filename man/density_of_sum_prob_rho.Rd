@@ -7,7 +7,7 @@
 density_of_sum_prob_rho(x, size, prob = 0.5, rho = 0, ...)
 }
 \arguments{
-\item{x}{number of successes}
+\item{x}{vector of quantiles}
 
 \item{size}{vector giving the number of trials for each group.}
 

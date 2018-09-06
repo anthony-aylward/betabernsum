@@ -8,7 +8,7 @@ dbbs(x, size, prob = 0.5, rho = 0, shape1 = NULL, shape2 = NULL,
   ...)
 }
 \arguments{
-\item{x}{vector of quantiles.}
+\item{x, q}{vector of quantiles.}
 
 \item{size}{vector giving the number of trials for each group.}
 

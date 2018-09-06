@@ -7,21 +7,6 @@
 pbbs(q, size, prob = 0.5, rho = 0, shape1 = NULL, shape2 = NULL,
   ...)
 }
-\arguments{
-\item{q}{vector of quantiles.}
-
-\item{size}{vector giving the number of trials for each group.}
-
-\item{prob}{vector giving probability of success for each group.}
-
-\item{rho}{vector giving correlation parameter for each group.}
-
-\item{shape1, shape2}{the two (positive) shape parameters of the standard
-beta distribution. See the documentation for \code{Betabinom} in the
-\code{VGAM} package.}
-
-\item{...}{other parameters passed to \code{Betabinom}}
-}
 \description{
 Distribution function for a sum of beta-bernoulli variables
 }

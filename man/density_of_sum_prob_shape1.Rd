@@ -7,7 +7,7 @@
 density_of_sum_prob_shape1(x, size, prob, shape1, ...)
 }
 \arguments{
-\item{x}{number of successes}
+\item{x}{vector of quantiles}
 
 \item{size}{vector giving the number of trials for each group.}
 
