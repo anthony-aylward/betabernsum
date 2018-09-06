@@ -204,7 +204,7 @@ pbbs <- function(
     function(q_i) {
       sum(
         sapply(
-          0:q,
+          0:q_i,
           function(x) {
             dbbs(
               x,
