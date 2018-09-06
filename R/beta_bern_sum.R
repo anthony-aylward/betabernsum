@@ -179,9 +179,7 @@ dbbs <- function(
   }
 }
 
-#' @title Distribution function for a sum of beta-bernoulli variables
-#'
-#' @describeIn dbbs
+#' @describeIn dbbs Distribution function for a sum of beta-bernoulli variables
 #' @export
 pbbs <- function(
   q,

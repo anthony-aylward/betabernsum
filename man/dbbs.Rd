@@ -2,9 +2,13 @@
 % Please edit documentation in R/beta_bern_sum.R
 \name{dbbs}
 \alias{dbbs}
+\alias{pbbs}
 \title{Probability mass function for a sum of beta-bernoulli variables}
 \usage{
 dbbs(x, size, prob = 0.5, rho = 0, shape1 = NULL, shape2 = NULL,
+  ...)
+
+pbbs(q, size, prob = 0.5, rho = 0, shape1 = NULL, shape2 = NULL,
   ...)
 }
 \arguments{
@@ -25,3 +29,8 @@ beta distribution. See the documentation for \code{Betabinom} in the
 \description{
 Probability mass function for a sum of beta-bernoulli variables
 }
+\section{Functions}{
+\itemize{
+\item \code{pbbs}: Distribution function for a sum of beta-bernoulli variables
+}}
+
