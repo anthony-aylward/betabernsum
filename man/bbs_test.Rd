@@ -23,17 +23,12 @@ beta distribution. See the documentation for \code{Betabinom} in the
 \item{...}{other parameters passed to \code{Betabinom}}
 }
 \value{
-a list containing the statistics of the test
+\describe{
+  \item{x}{the number of successes in the input}.
+  \item{size}{the sample size parameter of the input}.
+  \item{p_value}{the p-value of the hypothesis test}.
+}
 }
 \description{
 Performs a hypothesis test against a BBS null.
-}
-\details{
-Returns a list with three elements:
-
-\describe{
-  \item{x} the number of successes in the input.
-  \item{size} the sample size parameter of the input.
-  \item{p_value} the p-value of the hypothesis test.
-}
 }
