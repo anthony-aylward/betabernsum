@@ -15,9 +15,9 @@
 #'   \code{VGAM} package.
 #' @param ... other parameters passed to \code{Betabinom}
 #' @return \describe{
-#'   \item{x}{the number of successes in the input}.
-#'   \item{size}{the sample size parameter of the input}.
-#'   \item{p_value}{the p-value of the hypothesis test}.
+#'   \item{x}{the number of successes in the input.}
+#'   \item{size}{the sample size parameter of the input.}
+#'   \item{p_value}{the p-value of the hypothesis test.}
 #' }
 #' @export
 bbs_test <- function(

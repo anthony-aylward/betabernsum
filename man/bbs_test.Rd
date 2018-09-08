@@ -24,9 +24,9 @@ beta distribution. See the documentation for \code{Betabinom} in the
 }
 \value{
 \describe{
-  \item{x}{the number of successes in the input}.
-  \item{size}{the sample size parameter of the input}.
-  \item{p_value}{the p-value of the hypothesis test}.
+  \item{x}{the number of successes in the input.}
+  \item{size}{the sample size parameter of the input.}
+  \item{p_value}{the p-value of the hypothesis test.}
 }
 }
 \description{
