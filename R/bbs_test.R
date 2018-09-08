@@ -6,14 +6,6 @@
 #'
 #' @description Performs a hypothesis test against a BBS null.
 #'
-#' @details Returns a list with three elements:
-#'
-#' \describe{
-#'   \item{x} the number of successes in the input.
-#'   \item{size} the sample size parameter of the input.
-#'   \item{p_value} the p-value of the hypothesis test.
-#' }
-#'
 #' @param x number of successes
 #' @param size vector giving the number of trials for each group.
 #' @param prob vector giving probability of success for each group.
@@ -22,7 +14,11 @@
 #'   beta distribution. See the documentation for \code{Betabinom} in the
 #'   \code{VGAM} package.
 #' @param ... other parameters passed to \code{Betabinom}
-#' @return a list containing the statistics of the test
+#' @return \describe{
+#'   \item{x}{the number of successes in the input}.
+#'   \item{size}{the sample size parameter of the input}.
+#'   \item{p_value}{the p-value of the hypothesis test}.
+#' }
 #' @export
 bbs_test <- function(
   x,
