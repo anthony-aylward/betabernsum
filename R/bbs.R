@@ -11,6 +11,8 @@
 #' @param shape1,shape2 the two (positive) shape parameters of the standard
 #'   beta distribution. See the documentation for \code{Betabinom} in the
 #'   \code{VGAM} package.
+#' @param lower_tail logical. If TRUE (default), probabilities are
+#'   \eqn{P[X <= x]} otherwise, \eqn{P[X > x]}.
 #' @param ... other parameters passed to \code{Betabinom}
 #' @return numeric, the value of the probability mass or distribution function.
 #' @export
@@ -43,14 +45,23 @@ pbbs <- function(
   rho = 0,
   shape1 = NULL,
   shape2 = NULL,
+  lower_tail = TRUE
   ...
 ) {
   sapply(
     q,
     function(q_i) {
+      if (lower_tail) {
+        if (q_i < 0) return(0)
+        tail <- 0:q_i
+      } else if (q_i >= sum(size)) {
+        return(0)
+      } else {
+        tail <- (q_i + 1):sum(size)
+      }
       sum(
         sapply(
-          0:q_i,
+          tail,
           function(x) {
             dbbs(
               x,

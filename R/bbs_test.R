@@ -15,8 +15,8 @@
 #'   \code{VGAM} package.
 #' @param ... other parameters passed to \code{Betabinom}
 #' @return \describe{
-#'   \item{x}{the number of successes in the input.}
-#'   \item{size}{the number of trials for each group of the input.}
+#'   \item{statistic}{the number of successes in the input.}
+#'   \item{parameter}{the number of trials for each group of the input.}
 #'   \item{p_value}{the p-value of the hypothesis test.}
 #' }
 #' @export
@@ -30,7 +30,7 @@ bbs_test <- function(
   alternative = c("two_sided", "less", "greater"),
   ...
 ) {
-  dist_val <- pbbs(
+  lower_tail_area <- pbbs(
     q = x,
     size = size,
     prob = prob,
@@ -38,16 +38,40 @@ bbs_test <- function(
     shape1 = shape1,
     shape2 = shape2
   )
-  if (alternative[[1]] == "two_sided") {
-    p_value <- min(1, 2 * min(dist_val, 1 - dist_val))
-  } else if (alternative[[1]] == "less") {
-    p_value <- dist_val
-  } else if (alternative[[1]] == "greater") {
-    p_value <- 1 - dist_val
-  }
-  list(
-    statistic = x,
-    parameter = size,
-    p_value = p_value
+  upper_tail_area <- pbbs(
+    q = x - 1,
+    size = size,
+    prob = prob,
+    rho = rho,
+    shape1 = shape1,
+    shape2 = shape2,
+    lower_tail = FALSE
   )
+  if (alternative[[1]] == "two_sided") {
+    if (lower_tail_area < upper_tail_area) {
+      p_value <- lower_tail_area + pbbs(
+        q = sum(size) - x - 1,
+        size = size,
+        prob = prob,
+        rho = rho,
+        shape1 = shape1,
+        shape2 = shape2,
+        lower_tail = FALSE
+      )
+    } else {
+      p_value <- upper_tail_area + pbbs(
+        q = sum(size) - x,
+        size = size,
+        prob = prob,
+        rho = rho,
+        shape1 = shape1,
+        shape2 = shape2
+      )
+    }
+  } else if (alternative[[1]] == "less") {
+    p_value <- lower_tail_area
+  } else if (alternative[[1]] == "greater") {
+    p_value <- upper_tail_area
+  }
+  list(statistic = x, parameter = size, p_value = p_value)
 }
