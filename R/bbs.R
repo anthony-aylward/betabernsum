@@ -45,7 +45,7 @@ pbbs <- function(
   rho = 0,
   shape1 = NULL,
   shape2 = NULL,
-  lower_tail = TRUE
+  lower_tail = TRUE,
   ...
 ) {
   sapply(

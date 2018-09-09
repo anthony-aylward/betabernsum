@@ -9,7 +9,7 @@ dbbs(x, size, prob = 0.5, rho = 0, shape1 = NULL, shape2 = NULL,
   ...)
 
 pbbs(q, size, prob = 0.5, rho = 0, shape1 = NULL, shape2 = NULL,
-  ...)
+  lower_tail = TRUE, ...)
 }
 \arguments{
 \item{x, q}{vector of quantiles.}
@@ -25,6 +25,9 @@ beta distribution. See the documentation for \code{Betabinom} in the
 \code{VGAM} package.}
 
 \item{...}{other parameters passed to \code{Betabinom}}
+
+\item{lower_tail}{logical. If TRUE (default), probabilities are
+\eqn{P[X <= x]} otherwise, \eqn{P[X > x]}.}
 }
 \value{
 numeric, the value of the probability mass or distribution function.
