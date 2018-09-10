@@ -48,26 +48,7 @@ bbs_test <- function(
     lower_tail = FALSE
   )
   if (alternative[[1]] == "two_sided") {
-    if (lower_tail_area < upper_tail_area) {
-      p_value <- lower_tail_area + pbbs(
-        q = sum(size) - x - 1,
-        size = size,
-        prob = prob,
-        rho = rho,
-        shape1 = shape1,
-        shape2 = shape2,
-        lower_tail = FALSE
-      )
-    } else {
-      p_value <- upper_tail_area + pbbs(
-        q = sum(size) - x,
-        size = size,
-        prob = prob,
-        rho = rho,
-        shape1 = shape1,
-        shape2 = shape2
-      )
-    }
+    p_value <- min(1, 2 * min(lower_tail_area, upper_tail_area))
   } else if (alternative[[1]] == "less") {
     p_value <- lower_tail_area
   } else if (alternative[[1]] == "greater") {
