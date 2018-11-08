@@ -28,7 +28,7 @@ integrand_dependent <- function(t, x, size, shape1, shape2) {
             q = qbeta(t_i, shape1[[i]], shape2[[i]])
             if (x[[i]] == 0) {
               (1 - q)^(size[[i]])
-            else if (x[[i]] == size[[i]]) {
+            } else if (x[[i]] == size[[i]]) {
               q^(x[[i]])
             } else {
               q^x[[i]] * (1 - q)^(size[[i]] - x[[i]])
