@@ -11,11 +11,11 @@
 #' @param shape1,shape2 the two (positive) shape parameters of the standard
 #'   beta distribution. See the documentation for \code{Betabinom} in the
 #'   \code{VGAM} package.
-#' @param lower_tail logical. If TRUE (default), probabilities are
-#'   \eqn{P[X <= x]} otherwise, \eqn{P[X > x]}.
 #' @param independent logical. If TRUE (default), assume a sum of two
 #'   independent groups of variables. If FALSE, assume all variables are
 #'   mutually dependent.
+#' @param lower_tail logical. If TRUE (default), probabilities are
+#'   \eqn{P[X <= x]} otherwise, \eqn{P[X > x]}.
 #' @param ... other parameters passed to \code{Betabinom}
 #' @return numeric, the value of the probability mass or distribution function.
 #' @export
