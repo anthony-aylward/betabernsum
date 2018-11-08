@@ -94,7 +94,7 @@ pbbs <- function(
   shape1 = NULL,
   shape2 = NULL,
   lower_tail = TRUE,
-  independent = sTRUE,
+  independent = TRUE,
   ...
 ) {
   sapply(
