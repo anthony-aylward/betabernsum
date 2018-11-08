@@ -33,7 +33,7 @@ probability_mass_independent <- function(
       function(index) {
         if (is.null(shape1) && is.null(shape2)) {
           dbetabinom(
-            row[[index]],
+            x[[index]],
             size[[index]],
             prob = prob[[index]],
             rho = rho[[index]],
@@ -41,7 +41,7 @@ probability_mass_independent <- function(
           )
         } else if (is.numeric(shape1) && is.numeric(shape2)) {
           dbetabinom.ab(
-            row[[index]],
+            x[[index]],
             size[[index]],
             shape1 = shape1[[index]],
             shape2 = shape2[[index]],
@@ -50,7 +50,7 @@ probability_mass_independent <- function(
         } else if (is.numeric(shape1) && rho == 0) {
           function(index) {
             dbetabinom.ab(
-              row[[index]],
+              x[[index]],
               size[[index]],
               shape1 = shape1[[index]],
               shape2 = shape1[[index]]*(1-prob[[index]])/prob[[index]],

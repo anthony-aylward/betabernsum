@@ -13,6 +13,9 @@
 #'   \code{VGAM} package.
 #' @param lower_tail logical. If TRUE (default), probabilities are
 #'   \eqn{P[X <= x]} otherwise, \eqn{P[X > x]}.
+#' @param independent logical. If TRUE (default), assume a sum of two
+#'   independent groups of variables. If FALSE, assume all variables are
+#'   mutually dependent.
 #' @param ... other parameters passed to \code{Betabinom}
 #' @return numeric, the value of the probability mass or distribution function.
 #' @export
