@@ -104,6 +104,7 @@ probability_mass_dependent <- function(x, size, shape1, shape2) {
 #'   beta distribution. See the documentation for \code{Betabinom} in the
 #'   \code{VGAM} package.
 #' @return numeric, the value of the BBS probability mass function.
+#' @export
 pmf_of_sum_shape1_shape2_dependent <- function(x, size, shape1, shape2) {
   if (length(shape1) == 1) shape1 <- rep(shape1, 2)
   if (length(shape2) == 1) shape2 <- rep(shape2, 2)
