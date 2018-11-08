@@ -11,6 +11,6 @@
 #' @export
 region <- function(x, size) {
   if (x < 0 || x > sum(size)) stop("provided x is out of bounds")
-  coord1 <- min(0, x - size[[2]]):min(x, size[[1]])
+  coord1 <- max(0, min(0, x - size[[2]])):min(x, size[[1]])
   cbind(coord1, x - coord1)
 }
