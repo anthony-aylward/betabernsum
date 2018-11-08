@@ -9,7 +9,7 @@ dbbs(x, size, prob = 0.5, rho = 0, shape1 = NULL, shape2 = NULL,
   independent = TRUE, ...)
 
 pbbs(q, size, prob = 0.5, rho = 0, shape1 = NULL, shape2 = NULL,
-  lower_tail = TRUE, independent = TRUE, ...)
+  independent = TRUE, lower_tail = TRUE, ...)
 }
 \arguments{
 \item{x, q}{vector of quantiles.}
