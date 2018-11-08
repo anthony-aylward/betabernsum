@@ -50,7 +50,7 @@ integrand_dependent <- function(t, x, size, shape1, shape2) {
 log_integral_dependent <- function(x, size, shape1, shape2) {
   log(
     integrate(
-      integrand,
+      integrand_dependent,
       0,
       1,
       x = x,
@@ -89,8 +89,8 @@ log_coefficient_dependent <- function(x, size, shape1, shape2) {
 probability_mass_dependent <- function(x, size, shape1, shape2) {
   exp(
     sum(
-      log_coefficient(x, size, shape1, shape2),
-      log_integral(x, size, shape1, shape2)
+      log_coefficient_dependent(x, size, shape1, shape2),
+      log_integral_dependent(x, size, shape1, shape2)
     )
   )
 }
