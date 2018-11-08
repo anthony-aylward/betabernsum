@@ -23,7 +23,7 @@ dbbs <- function(
   rho = 0,
   shape1 = NULL,
   shape2 = NULL,
-  independent=TRUE,
+  independent = TRUE,
   ...
 ) {
   if (is.null(shape1) && is.null(shape2)) {
@@ -94,6 +94,7 @@ pbbs <- function(
   shape1 = NULL,
   shape2 = NULL,
   lower_tail = TRUE,
+  independent = sTRUE,
   ...
 ) {
   sapply(
@@ -118,6 +119,7 @@ pbbs <- function(
               rho = rho,
               shape1 = shape1,
               shape2 = shape2,
+              independent = independent,
               ...
             )
           }
