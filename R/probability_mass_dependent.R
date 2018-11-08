@@ -119,7 +119,7 @@ pmf_of_sum_shape1_shape2_dependent <- function(x, size, shape1, shape2) {
           region(x_i, size),
           1,
           function(row) {
-            probability_mass(row, size, shape1, shape2)
+            probability_mass_dependent(row, size, shape1, shape2)
           }
         )
       )
