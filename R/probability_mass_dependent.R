@@ -56,7 +56,8 @@ log_integral_dependent <- function(x, size, shape1, shape2) {
       x = x,
       size = size,
       shape1 = shape1,
-      shape2 = shape2
+      shape2 = shape2,
+      rel.tol = 1e-15
     )[["value"]]
   )
 }
