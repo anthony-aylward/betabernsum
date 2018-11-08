@@ -3,4 +3,5 @@
 export(bbs_test)
 export(dbbs)
 export(pbbs)
+export(region)
 import(VGAM)
