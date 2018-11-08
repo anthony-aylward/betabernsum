@@ -23,17 +23,65 @@ dbbs <- function(
   rho = 0,
   shape1 = NULL,
   shape2 = NULL,
+  independent=TRUE,
   ...
 ) {
   if (is.null(shape1) && is.null(shape2)) {
-    pmf_of_sum_prob_rho(x, size, prob = prob, rho = rho, ...)
+    if (length(prob) == 1) prob <- rep(prob, 2)
+    if (length(rho) == 1) rho <- rep(rho, 2)
+    if (!all(sapply(list(size, prob, rho), length) == 2)) {
+      stop("bad argument lengths")
+    }
+    if (!independent) {
+      stop("provide `shape1` and `shape2` for the dependent case")
+    }
   } else if (is.numeric(shape1) && is.numeric(shape2)) {
-    pmf_of_sum_shape1_shape2(x, size, shape1 = shape1, shape2 = shape2, ...)
+    if (length(shape1) == 1) shape1 <- rep(shape1, 2)
+    if (length(shape2) == 1) shape2 <- rep(shape2, 2)
+    if (!all(sapply(list(size, shape1, shape2), length) == 2)) {
+      stop("bad argument lengths")
+    }
   } else if (is.numeric(shape1) && rho == 0) {
-    pmf_of_sum_prob_shape1(x, size, prob = prob, shape1 = shape1, ...)
-  } else {
-    stop("Invalid arguments")
+    if (length(prob) == 1) prob <- rep(prob, 2)
+    if (length(shape1) == 1) shape1 <- rep(shape1, 2)
+    if (!all(sapply(list(size, prob, shape1), length) == 2)) {
+      stop("bad argument lengths")
+    }
+    if (!independent) {
+      stop("provide `shape1` and `shape2` for the dependent case")
+    }
   }
+  sapply(
+    x,
+    function(x_i) {
+      sum(
+        apply(
+          region(x_i, size),
+          1,
+          function(row) {
+            if (independent) {
+              probability_mass_independent(
+                row,
+                size,
+                prob = prob,
+                rho = rho,
+                shape1 = shape1,
+                shape2 = shape2,
+                ...
+              )
+            } else {
+              probability_mass_dependent(
+                row,
+                size,
+                shape1 = shape1,
+                shape2 = shape2
+              )
+            }
+          }
+        )
+      )
+    }
+  )
 }
 
 #' @describeIn dbbs Distribution function for a sum of beta-bernoulli variables

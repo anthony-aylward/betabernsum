@@ -6,7 +6,7 @@
 \title{Probability mass function for a sum of beta-bernoulli variables}
 \usage{
 dbbs(x, size, prob = 0.5, rho = 0, shape1 = NULL, shape2 = NULL,
-  ...)
+  independent = TRUE, ...)
 
 pbbs(q, size, prob = 0.5, rho = 0, shape1 = NULL, shape2 = NULL,
   lower_tail = TRUE, ...)

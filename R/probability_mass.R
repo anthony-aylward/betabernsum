@@ -11,88 +11,84 @@
 
 # Functions ====================================================================
 
-#' @title Probability mass function of a sum with \code{prob}/\code{rho}
-#'   parametrization
+#' @title Probability mass for a bbs in the independent case
 #'
-#' @param x vector of quantiles
-#' @param size vector giving the number of trials for each group.
-#' @param prob vector giving probability of success for each group.
-#' @param rho vector giving correlation parameter for each group.
-#' @param ... other parameters passed to dbetabinom.
-#' @return numeric, the value of the BBS probability mass function.
-pmf_of_sum_prob_rho <- function(x, size, prob = 0.5, rho = 0, ...) {
-  if (length(prob) == 1) prob <- rep(prob, 2)
-  if (length(rho) == 1) rho <- rep(rho, 2)
-  if (!all(sapply(list(size, prob, rho), length) == 2)) {
-    stop("bad argument lengths")
-  }
-  sapply(
-    x,
-    function(x_i) {
-      sum(
-        apply(
-          region(x_i, size),
-          1,
-          function(row) {
-            prod(
-              sapply(
-                c(1, 2),
-                function(index) {
-                  dbetabinom(
-                    row[[index]],
-                    size[[index]],
-                    prob = prob[[index]],
-                    rho = rho[[index]],
-                    ...
-                  )
-                }
-              )
-            )
-          }
-        )
-      )
-    }
-  )
-}
-
-#' @title Probability mass function of a sum with \code{shape1}/\code{shape2}
-#'   parametrization
-#'
-#' @param x vector of quantiles
+#' @param x vector giving the number of successes for each group.
 #' @param size vector giving the number of trials for each group.
 #' @param shape1,shape2 the two (positive) shape parameters of the standard
-#'   beta distribution. See the documentation for \code{Betabinom} in the
-#'   \code{VGAM} package.
-#' @param ... other parameters passed to dbetabinom.ab
-#' @return numeric, the value of the BBS probability mass function.
-pmf_of_sum_shape1_shape2 <- function(x, size, shape1, shape2, ...) {
-  if (length(shape1) == 1) shape1 <- rep(shape1, 2)
-  if (length(shape2) == 1) shape2 <- rep(shape2, 2)
-  if (!all(sapply(list(size, shape1, shape2), length) == 2)) {
-    stop("bad argument lengths")
-  }
-  sapply(
-    x,
-    function(x_i) {
-      sum(
-        apply(
-          region(x_i, size),
-          1,
-          function(row) {
-            prod(
-              sapply(
-                c(1,2),
-                function(index) {
-                  dbetabinom.ab(
-                    row[[index]],
-                    size[[index]],
-                    shape1 = shape1[[index]],
-                    shape2 = shape2[[index]],
-                    ...
-                  )
-                }
-              )
+#'   beta distribution.
+#' @return numeric, the probability mass.
+probability_mass_independent <- function(
+  x,
+  size,
+  prob = c(0.5, 0.5),
+  rho = c(0, 0),
+  shape1 = NULL,
+  shape2 = NULL,
+  ...
+) {
+  prod(
+    sapply(
+      c(1, 2),
+      function(index) {
+        if (is.null(shape1) && is.null(shape2)) {
+          dbetabinom(
+            row[[index]],
+            size[[index]],
+            prob = prob[[index]],
+            rho = rho[[index]],
+            ...
+          )
+        } else if (is.numeric(shape1) && is.numeric(shape2)) {
+          dbetabinom.ab(
+            row[[index]],
+            size[[index]],
+            shape1 = shape1[[index]],
+            shape2 = shape2[[index]],
+            ...
+          )
+        } else if (is.numeric(shape1) && rho == 0) {
+          function(index) {
+            dbetabinom.ab(
+              row[[index]],
+              size[[index]],
+              shape1 = shape1[[index]],
+              shape2 = shape1[[index]]*(1-prob[[index]])/prob[[index]],
+              ...
             )
+          }
+        } else {
+          stop("Invalid arguments")
+        }
+      }
+    )
+  )
+}
+
+#' @title The integrand for computing probability mass in the dependent case
+#'
+#' @param t vector of values
+#' @param x vector giving the number of successes for each group.
+#' @param size vector giving the number of trials for each group.
+#' @param shape1,shape2 the two (positive) shape parameters of the standard
+#'   beta distribution. 
+#' @return numeric, the value of the evaluated integrand.
+integrand_dependent <- function(t, x, size, shape1, shape2) {
+  sapply(
+    t,
+    function(t_i) {
+      prod(
+        sapply(
+          1:min(sapply(list(x, size, shape1, shape2), length)),
+          function(i) {
+            q = qbeta(t_i, shape1[[i]], shape2[[i]])
+            if (x[[i]] == 0) {
+              (1 - q)^(size[[i]])
+            } else if (x[[i]] == size[[i]]) {
+              q^(x[[i]])
+            } else {
+              q^x[[i]] * (1 - q)^(size[[i]] - x[[i]])
+            }
           }
         )
       )
@@ -100,46 +96,58 @@ pmf_of_sum_shape1_shape2 <- function(x, size, shape1, shape2, ...) {
   )
 }
 
-#' @title Probability mass function of a sum with \code{prob}/\code{shape1}
-#'   parametrization
+#' @title Logarithm of the integral component of probability mass
 #'
-#' @param x vector of quantiles
+#' @param x vector giving the number of successes for each group.
 #' @param size vector giving the number of trials for each group.
-#' @param prob vector giving probability of success for each group.
-#' @param shape1 vector giving correlation parameter for each group.
-#' @param ... other parameters passed to dbetabinom.ab
-#' @return numeric, the value of the BBS probability mass function.
-pmf_of_sum_prob_shape1 <- function(x, size, prob, shape1, ...) {
-  if (length(prob) == 1) prob <- rep(prob, 2)
-  if (length(shape1) == 1) shape1 <- rep(shape1, 2)
-  if (!all(sapply(list(size, prob, shape1), length) == 2)) {
-    stop("bad argument lengths")
-  }
-  sapply(
-    x,
-    function(x_i) {
-      sum(
-        apply(
-          region(x, size),
-          1,
-          function(row) {
-            prod(
-              sapply(
-                c(1,2),
-                function(index) {
-                  dbetabinom.ab(
-                    row[[index]],
-                    size[[index]],
-                    shape1 = shape1[[index]],
-                    shape2 = shape1[[index]]*(1-prob[[index]])/prob[[index]],
-                    ...
-                  )
-                }
-              )
-            )
-          }
-        )
-      )
-    }
+#' @param shape1,shape2 the two (positive) shape parameters of the standard
+#'   beta distribution. 
+#' @return numeric, the value of the evaluated integrand.
+log_integral_dependent <- function(x, size, shape1, shape2) {
+  log(
+    integrate(
+      integrand_dependent,
+      0,
+      1,
+      x = x,
+      size = size,
+      shape1 = shape1,
+      shape2 = shape2,
+      rel.tol = 1e-15
+    )[["value"]]
+  )
+}
+
+#' @title Logarithm of the coefficient component of probability mass
+#'
+#' @param x vector giving the number of successes for each group.
+#' @param size vector giving the number of trials for each group.
+#' @param shape1,shape2 the two (positive) shape parameters of the standard
+#'   beta distribution. 
+#' @return numeric, the value of the log-coefficient.
+log_coefficient_dependent <- function(x, size, shape1, shape2) {
+  sum(
+    sapply(
+      1:min(sapply(list(x, size, shape1, shape2), length)),
+      function(i) {
+        log(choose(size[[i]], x[[i]]))
+      }
+    )
+  )
+}
+
+#' @title Probability mass for a bbs in the dependent case
+#'
+#' @param x vector giving the number of successes for each group.
+#' @param size vector giving the number of trials for each group.
+#' @param shape1,shape2 the two (positive) shape parameters of the standard
+#'   beta distribution. 
+#' @return numeric, the probability mass.
+probability_mass_dependent <- function(x, size, shape1, shape2) {
+  exp(
+    sum(
+      log_coefficient_dependent(x, size, shape1, shape2),
+      log_integral_dependent(x, size, shape1, shape2)
+    )
   )
 }
