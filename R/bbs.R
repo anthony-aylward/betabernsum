@@ -120,7 +120,7 @@ pbbs <- function(
       } else if (q_i >= sum(size)) {
         return(0)
       } else {
-        if (q_i > (sum(size) / 2)) {
+        if (q_i >= (sum(size) / 2)) {
           tail <- (q_i + 1):sum(size)
           speed_flip <- FALSE
         } else {
