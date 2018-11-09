@@ -5,7 +5,8 @@
 \title{Beta Bernoulli Sum Test}
 \usage{
 bbs_test(x, size, prob = 0.5, rho = 0, shape1 = NULL,
-  shape2 = NULL, alternative = c("two_sided", "less", "greater"), ...)
+  shape2 = NULL, alternative = c("two_sided", "less", "greater"),
+  cores = 1, ...)
 }
 \arguments{
 \item{x}{number of successes}
@@ -19,6 +20,8 @@ bbs_test(x, size, prob = 0.5, rho = 0, shape1 = NULL,
 \item{shape1, shape2}{the two (positive) shape parameters of the standard
 beta distribution. See the documentation for \code{Betabinom} in the
 \code{VGAM} package.}
+
+\item{cores}{integer. Number of cores to use (default 1).}
 
 \item{...}{other parameters passed to \code{Betabinom}}
 }

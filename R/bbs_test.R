@@ -13,6 +13,7 @@
 #' @param shape1,shape2 the two (positive) shape parameters of the standard
 #'   beta distribution. See the documentation for \code{Betabinom} in the
 #'   \code{VGAM} package.
+#' @param cores integer. Number of cores to use (default 1).
 #' @param ... other parameters passed to \code{Betabinom}
 #' @return \describe{
 #'   \item{statistic}{the number of successes in the input.}
@@ -28,6 +29,7 @@ bbs_test <- function(
   shape1 = NULL,
   shape2 = NULL,
   alternative = c("two_sided", "less", "greater"),
+  cores = 1,
   ...
 ) {
   lower_tail_area <- pbbs(
@@ -36,7 +38,8 @@ bbs_test <- function(
     prob = prob,
     rho = rho,
     shape1 = shape1,
-    shape2 = shape2
+    shape2 = shape2,
+    cores = cores
   )
   upper_tail_area <- pbbs(
     q = x - 1,
@@ -45,7 +48,8 @@ bbs_test <- function(
     rho = rho,
     shape1 = shape1,
     shape2 = shape2,
-    lower_tail = FALSE
+    lower_tail = FALSE,
+    cores = cores
   )
   if (alternative[[1]] == "two_sided") {
     p_value <- min(1, 2 * min(lower_tail_area, upper_tail_area))
