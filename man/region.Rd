@@ -12,8 +12,8 @@ region(x, size)
 \item{size}{vector giving the number of trials for each group.}
 }
 \value{
-a matrix with two columns, the rows of which are the coordinates of
-  the region of integration.
+a matrix with one column per sample, the rows of which are the
+  coordinates of the region of integration.
 }
 \description{
 Region of integration for bernoulli sums
