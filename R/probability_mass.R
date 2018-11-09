@@ -21,15 +21,15 @@
 probability_mass_independent <- function(
   x,
   size,
-  prob = c(0.5, 0.5),
-  rho = c(0, 0),
+  prob = 0.5,
+  rho = 0,
   shape1 = NULL,
   shape2 = NULL,
   ...
 ) {
   prod(
     sapply(
-      c(1, 2),
+      1:length(x),
       function(index) {
         if (is.null(shape1) && is.null(shape2)) {
           dbetabinom(
@@ -79,7 +79,7 @@ integrand_dependent <- function(t, x, size, shape1, shape2) {
     function(t_i) {
       prod(
         sapply(
-          1:min(sapply(list(x, size, shape1, shape2), length)),
+          1:length(x),
           function(i) {
             q = qbeta(t_i, shape1[[i]], shape2[[i]])
             if (x[[i]] == 0) {
@@ -128,7 +128,7 @@ log_integral_dependent <- function(x, size, shape1, shape2) {
 log_coefficient_dependent <- function(x, size, shape1, shape2) {
   sum(
     sapply(
-      1:min(sapply(list(x, size, shape1, shape2), length)),
+      1:length(x),
       function(i) {
         log(choose(size[[i]], x[[i]]))
       }
