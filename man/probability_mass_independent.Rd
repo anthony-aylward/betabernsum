@@ -4,8 +4,8 @@
 \alias{probability_mass_independent}
 \title{Probability mass for a bbs in the independent case}
 \usage{
-probability_mass_independent(x, size, prob = c(0.5, 0.5), rho = c(0,
-  0), shape1 = NULL, shape2 = NULL, ...)
+probability_mass_independent(x, size, prob = 0.5, rho = 0,
+  shape1 = NULL, shape2 = NULL, ...)
 }
 \arguments{
 \item{x}{vector giving the number of successes for each group.}

@@ -3,6 +3,5 @@
 export(bbs_test)
 export(dbbs)
 export(pbbs)
-export(pmf_of_sum_shape1_shape2_dependent)
 import(VGAM)
 import(partitions)
