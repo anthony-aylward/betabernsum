@@ -9,7 +9,7 @@ dbbs(x, size, prob = 0.5, rho = 0, shape1 = NULL, shape2 = NULL,
   independent = TRUE, ...)
 
 pbbs(q, size, prob = 0.5, rho = 0, shape1 = NULL, shape2 = NULL,
-  independent = TRUE, lower_tail = TRUE, ...)
+  independent = TRUE, lower_tail = TRUE, cores = 1, ...)
 }
 \arguments{
 \item{x, q}{vector of quantiles.}
@@ -32,6 +32,8 @@ mutually dependent.}
 
 \item{lower_tail}{logical. If TRUE (default), probabilities are
 \eqn{P[X <= x]} otherwise, \eqn{P[X > x]}.}
+
+\item{cores}{integer. Number of cores to use (default 1).}
 }
 \value{
 numeric, the value of the probability mass or distribution function.

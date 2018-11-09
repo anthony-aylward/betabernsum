@@ -2,6 +2,15 @@
 # bbs.R
 #===============================================================================
 
+# Imports ======================================================================
+
+#' @import parallel
+
+
+
+
+# Functions ====================================================================
+
 #' @title Probability mass function for a sum of beta-bernoulli variables
 #'
 #' @param x,q vector of quantiles.
@@ -16,6 +25,7 @@
 #'   mutually dependent.
 #' @param lower_tail logical. If TRUE (default), probabilities are
 #'   \eqn{P[X <= x]} otherwise, \eqn{P[X > x]}.
+#' @param cores integer. Number of cores to use (default 1).
 #' @param ... other parameters passed to \code{Betabinom}
 #' @return numeric, the value of the probability mass or distribution function.
 #' @export
@@ -92,6 +102,7 @@ pbbs <- function(
   shape2 = NULL,
   independent = TRUE,
   lower_tail = TRUE,
+  cores = 1,
   ...
 ) {
   sapply(
@@ -118,20 +129,23 @@ pbbs <- function(
         }
       }
       as.integer(speed_flip) + (1 - 2 * speed_flip) * sum(
-        sapply(
-          tail,
-          function(x) {
-            dbbs(
-              x,
-              size = size,
-              prob = prob,
-              rho = rho,
-              shape1 = shape1,
-              shape2 = shape2,
-              independent = independent,
-              ...
-            )
-          }
+        unlist(
+          mclapply(
+            tail,
+            function(x) {
+              dbbs(
+                x,
+                size = size,
+                prob = prob,
+                rho = rho,
+                shape1 = shape1,
+                shape2 = shape2,
+                independent = independent,
+                ...
+              )
+            },
+            mc.cores = cores
+          )
         )
       )
     }
