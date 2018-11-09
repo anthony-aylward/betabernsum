@@ -19,32 +19,48 @@
 #'   coordinates of the region of integration.
 region <- function(x, size) {
   if (x < 0 || x > sum(size)) stop("provided x is out of bounds")
+  if (x == 0) return(matrix(0, nrow = 1, ncol = length(size)))
+  if (x == sum(size)) return(matrix(size, nrow = 1))
   size_sorted <- sort(size, decreasing = TRUE)
-  parts <- diffparts(x)[1:length(size),, drop = FALSE]
-  parts <- parts[,
-    apply(
-      parts,
-      2,
-      function(col) {
-        all(col <= size_sorted) && (sum(col) >= x)
-      }
-    )
-  ]
-  parts <- do.call(
+
+  if (x == 1) {
+    part <- matrix(c(1, rep(0, length(size) - 1)), ncol = 1)
+  } else {
+    if (x < length(size)) {
+      part <- parts(x)
+      part <- rbind(
+        part,
+        matrix(0, nrow = length(size) - x, ncol = ncol(part))
+      )
+    } else {
+      part <- parts(x)[1:length(size),, drop = FALSE]
+    }
+    part <- part[,
+      apply(
+        part,
+        2,
+        function(col) {
+          all(col <= size_sorted) && (sum(col) >= x)
+        }
+      )
+    ]
+  }
+
+  part <- do.call(
     cbind,
     lapply(
-      apply(parts, 2, function(col) {unique(permn(col))}),
+      apply(part, 2, function(col) {unique(permn(col))}),
       function(l) {do.call(cbind, l)}
     )
   )
-  parts <- parts[,
+  part <- part[,
     apply(
-      parts,
+      part,
       2,
       function(col) {
         all(col <= size)
       }
     )
   ]
-  t(parts)
+  t(part)
 }
