@@ -30,18 +30,18 @@ dbbs <- function(
   ...
 ) {
   if (is.null(shape1) && is.null(shape2)) {
-    if (!(length(unique(sapply(list(size, prob, rho), length))) == 1) {
+    if (!(length(unique(sapply(list(size, prob, rho), length))) == 1)) {
       stop("bad argument lengths")
     }
     if (!independent) {
       stop("provide `shape1` and `shape2` for the dependent case")
     }
   } else if (is.numeric(shape1) && is.numeric(shape2)) {
-    if (!(length(unique(sapply(list(size, shape1, shape2), length))) == 1)  {
+    if (!(length(unique(sapply(list(size, shape1, shape2), length))) == 1))  {
       stop("bad argument lengths")
     }
   } else if (is.numeric(shape1) && rho == 0) {
-    if (!(length(unique(sapply(list(size, prob, shape1), length))) == 1) {
+    if (!(length(unique(sapply(list(size, prob, shape1), length))) == 1)) {
       stop("bad argument lengths")
     }
     if (!independent) {
