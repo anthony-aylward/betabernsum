@@ -13,6 +13,9 @@
 #' @param shape1,shape2 the two (positive) shape parameters of the standard
 #'   beta distribution. See the documentation for \code{Betabinom} in the
 #'   \code{VGAM} package.
+#' @param independent logical. If TRUE (default), assume a sum of two
+#'   independent groups of variables. If FALSE, assume all variables are
+#'   mutually dependent.
 #' @param cores integer. Number of cores to use (default 1).
 #' @param ... other parameters passed to \code{Betabinom}
 #' @return \describe{
@@ -28,6 +31,7 @@ bbs_test <- function(
   rho = 0,
   shape1 = NULL,
   shape2 = NULL,
+  independent = TRUE,
   alternative = c("two_sided", "less", "greater"),
   cores = 1,
   ...
@@ -39,6 +43,7 @@ bbs_test <- function(
     rho = rho,
     shape1 = shape1,
     shape2 = shape2,
+    independent = independent,
     cores = cores
   )
   upper_tail_area <- pbbs(
@@ -48,6 +53,7 @@ bbs_test <- function(
     rho = rho,
     shape1 = shape1,
     shape2 = shape2,
+    independent = independent,
     lower_tail = FALSE,
     cores = cores
   )
