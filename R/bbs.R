@@ -128,6 +128,7 @@ pbbs <- function(
           speed_flip <- TRUE
         }
       }
+      if (any(tail >= 84)) return(NA)
       as.integer(speed_flip) + (1 - 2 * speed_flip) * sum(
         unlist(
           lapply(
