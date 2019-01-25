@@ -110,13 +110,23 @@ pbbs <- function(
     function(q_i) {
       if (lower_tail) {
         if (q_i < 0) return(0)
-        tail <- 0:q_i
-        speed_flip <- FALSE
+        if (q_i <= (sum(size) / 2)) {
+          tail <- 0:q_i
+          speed_flip <- FALSE
+        } else {
+          tail <- (q_i + 1):sum(size)
+          speed_flip <- TRUE
+        }
       } else if (q_i >= sum(size)) {
         return(0)
       } else {
-        tail <- 0:q_i
-        speed_flip <- TRUE
+        if (q_i >= (sum(size) / 2)) {
+          tail <- (q_i + 1):sum(size)
+          speed_flip <- FALSE
+        } else {
+          tail <- 0:q_i
+          speed_flip <- TRUE
+        }
       }
       as.integer(speed_flip) + (1 - 2 * speed_flip) * sum(
         unlist(
