@@ -28,16 +28,12 @@ region <- function(x, size) {
     part <- matrix(c(1, rep(0, length(size) - 1)), ncol = 1)
   } else {
     if (x < length(size)) {
-      print("x < length(size)")
-      print(x)
       part <- parts(x)
       part <- rbind(
         part,
         matrix(0, nrow = length(size) - x, ncol = ncol(part))
       )
     } else {
-      print("x >= length(size)")
-      print(x)
       part <- parts(x)[1:length(size),, drop = FALSE]
     }
     part <- part[,
@@ -53,13 +49,7 @@ region <- function(x, size) {
     )
   )
   part <- part[,
-    apply(
-      part,
-      2,
-      function(col) {
-        all(col <= size)
-      }
-    )
+    apply(part, 2, function(col) all(col <= size))
   ]
   t(part)
 }
