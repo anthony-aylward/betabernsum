@@ -36,10 +36,10 @@ region <- function(x, size) {
       part <- parts(x)[1:length(size),, drop = FALSE]
     }
     part <- part[,
-      apply(part, 2, function(col) all(col <= size_sorted) && (sum(col) >= x))
+      apply(part, 2, function(col) all(col <= size_sorted) && (sum(col) >= x)),
+      drop = FALSE
     ]
   }
-  print(dim(part))
   part <- do.call(
     cbind,
     lapply(
