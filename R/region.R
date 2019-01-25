@@ -39,7 +39,7 @@ region <- function(x, size) {
       apply(part, 2, function(col) all(col <= size_sorted) && (sum(col) >= x))
     ]
   }
-  print(c(x, size_sorted, part))
+  print(dim(part))
   part <- do.call(
     cbind,
     lapply(
