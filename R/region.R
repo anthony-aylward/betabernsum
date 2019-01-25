@@ -23,7 +23,7 @@ region <- function(x, size) {
   if (x == 0) return(matrix(0, nrow = 1, ncol = length(size)))
   if (x == sum(size)) return(matrix(size, nrow = 1))
   size_sorted <- sort(size, decreasing = TRUE)
-
+  print(c(x, size_sorted))
   if (x == 1) {
     part <- matrix(c(1, rep(0, length(size) - 1)), ncol = 1)
   } else {
