@@ -39,6 +39,7 @@ dbbs <- function(
   independent = TRUE,
   ...
 ) {
+  independent = TRUE
   if (is.null(shape1) && is.null(shape2)) {
     if (!(length(unique(sapply(list(size, prob, rho), length))) == 1)) {
       stop("bad argument lengths")
