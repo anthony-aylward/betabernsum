@@ -61,32 +61,32 @@ dbbs <- function(
   sapply(
     x,
     function(x_i) {
-      sum(
-        apply(
-          region(x_i, size),
-          1,
-          function(row) {
-            if (independent) {
-              probability_mass_independent(
-                row,
-                size,
-                prob = prob,
-                rho = rho,
-                shape1 = shape1,
-                shape2 = shape2,
-                ...
-              )
-            } else {
-              probability_mass_dependent(
-                row,
-                size,
-                shape1 = shape1,
-                shape2 = shape2
-              )
-            }
+      stop("establish test point")
+      summand <- apply(
+        region(x_i, size),
+        1,
+        function(row) {
+          if (independent) {
+            probability_mass_independent(
+              row,
+              size,
+              prob = prob,
+              rho = rho,
+              shape1 = shape1,
+              shape2 = shape2,
+              ...
+            )
+          } else {
+            probability_mass_dependent(
+              row,
+              size,
+              shape1 = shape1,
+              shape2 = shape2
+            )
           }
-        )
+        }
       )
+      sum(summand)
     }
   )
 }
@@ -130,7 +130,7 @@ pbbs <- function(
       }
       as.integer(speed_flip) + (1 - 2 * speed_flip) * sum(
         unlist(
-          mclapply(
+          lapply(
             tail,
             function(x) {
               dbbs(
@@ -143,8 +143,8 @@ pbbs <- function(
                 independent = independent,
                 ...
               )
-            },
-            mc.cores = cores
+            }
+            # mc.cores = cores
           )
         )
       )
