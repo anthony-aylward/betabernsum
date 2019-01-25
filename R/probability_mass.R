@@ -104,7 +104,7 @@ integrand_dependent <- function(t, x, size, shape1, shape2) {
 #'   beta distribution. 
 #' @return numeric, the value of the evaluated integrand.
 log_integral_dependent <- function(x, size, shape1, shape2) {
-  log(
+  integral <- tryCatch(
     integrate(
       integrand_dependent,
       0,
@@ -114,8 +114,10 @@ log_integral_dependent <- function(x, size, shape1, shape2) {
       shape1 = shape1,
       shape2 = shape2,
       rel.tol = 1e-15
-    )[["value"]]
+    )[["value"]],
+    error = function(e) NA
   )
+  log(integral)
 }
 
 #' @title Logarithm of the coefficient component of probability mass
