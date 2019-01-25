@@ -116,6 +116,7 @@ pbbs <- function(
       } else {
         speed_flip <- TRUE
       }
+      if (q_i > 83) return(NA)
       as.integer(!lower_tail) + (1 - 2 * (!lower_tail)) * sum(
         unlist(
           lapply(
