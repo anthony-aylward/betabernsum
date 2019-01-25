@@ -110,29 +110,16 @@ pbbs <- function(
     function(q_i) {
       if (lower_tail) {
         if (q_i < 0) return(0)
-        if (q_i <= (sum(size) / 2)) {
-          tail <- 0:q_i
-          speed_flip <- FALSE
-        } else {
-          tail <- (q_i + 1):sum(size)
-          speed_flip <- TRUE
-        }
+        speed_flip <- FALSE
       } else if (q_i >= sum(size)) {
         return(0)
       } else {
-        if (q_i >= (sum(size) / 2)) {
-          tail <- (q_i + 1):sum(size)
-          speed_flip <- FALSE
-        } else {
-          tail <- 0:q_i
-          speed_flip <- TRUE
-        }
+        speed_flip <- TRUE
       }
-      if (any(tail >= 84)) return(NA)
-      as.integer(speed_flip) + (1 - 2 * speed_flip) * sum(
+      as.integer(!lower_tail) + (1 - 2 * (!lower_tail)) * sum(
         unlist(
           lapply(
-            tail,
+            0:q_i,
             function(x) {
               dbbs(
                 x,
