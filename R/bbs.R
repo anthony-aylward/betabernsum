@@ -61,7 +61,6 @@ dbbs <- function(
   sapply(
     x,
     function(x_i) {
-      stop("establish test point")
       summand <- apply(
         region(x_i, size),
         1,
