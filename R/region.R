@@ -47,8 +47,6 @@ region <- function(x, size) {
       function(l) do.call(cbind, l)
     )
   )
-  part <- part[,
-    apply(part, 2, function(col) all(col <= size))
-  ]
+  part <- part[,apply(part, 2, function(col) all(col <= size))]
   t(part)
 }
