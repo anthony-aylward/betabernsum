@@ -102,7 +102,7 @@ integrand_dependent <- function(t, x, size, shape1, shape2) {
 #' @param size vector giving the number of trials for each group.
 #' @param shape1,shape2 the two (positive) shape parameters of the standard
 #'   beta distribution. 
-#' @return numeric, the value of the evaluated integrand.
+#' @return numeric, the value of the evaluated integral.
 log_integral_dependent <- function(x, size, shape1, shape2) {
   integral <- tryCatch(
     integrate(
@@ -127,7 +127,7 @@ log_integral_dependent <- function(x, size, shape1, shape2) {
 #' @param shape1,shape2 the two (positive) shape parameters of the standard
 #'   beta distribution. 
 #' @return numeric, the value of the log-coefficient.
-log_coefficient_dependent <- function(x, size, shape1, shape2) {
+log_coefficient_dependent <- function(x, size) {
   sum(
     sapply(
       1:length(x),

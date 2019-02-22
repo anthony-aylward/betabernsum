@@ -5,7 +5,7 @@
 # Imports ======================================================================
 
 from functools import reduce
-from math import log
+from math import exp, log
 from operator import mul
 from scipy.integrate import quad
 from scipy.misc import comb
@@ -129,7 +129,8 @@ def integrand_dependent(t, k, n, a, b):
 
     Returns
     -------
-    float
+    tuple
+        the values of the integrand
     """
 
     assert len(k) == len(n) == len(a) == len(b)
@@ -148,9 +149,65 @@ def log_integral_dependent(k, n, a, b):
     Parameters
     ----------
     k
+        iterable giving the number of successes for each group
     n
+        iterable giving the number of trials for each group
     a
+        iterable giving the first shape parameter for each group
     b
+        iterable giving the second shape parameter for each group
+
+    Returns
+    -------
+    float
+        the value of the log integral
     """
     
     return log(quad(integrand_dependent, 0, 1, args = (k, n, a, b))[0])
+
+
+def log_coefficient_dependent(k, n):
+    """get logarithm of coefficient
+
+    Parameters
+    ----------
+    k
+        iterable giving the number of successes for each group
+    n
+        iterable giving the number of trials for each group
+    
+    Returns
+    -------
+    float
+        the value of the log coefficient
+    """
+
+    return sum(log(comb(n_i, k_i)) for k_i, n_i in zip(k, n))
+
+
+def probability_mass_dependent(k, n, a, b):
+    """Probability mass for a bbs in the dependent case
+
+    Parameters
+    ----------
+    k
+        iterable giving the number of successes for each group
+    n
+        iterable giving the number of trials for each group
+    a
+        iterable giving the first shape parameter for each group
+    b
+        iterable giving the second shape parameter for each group
+    
+    Returns
+    -------
+    float
+        the probability mass
+    """
+
+    return exp(
+        log_coefficient_dependent(k, n)
+        + log_integral_dependent(k, n, a, b)
+    )
+
+
