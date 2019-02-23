@@ -7,7 +7,7 @@
 from functools import partial
 from multiprocessing import Pool
 from betabernsum.region import region
-from betebernsum.probability_mass import (
+from betabernsum.probability_mass import (
     probability_mass_independent, probability_mass_dependent
 )
 

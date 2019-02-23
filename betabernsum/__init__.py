@@ -1,1 +1,1 @@
-from betabernsum.region import region
+from betabernsum.bbs_test import bbs_test

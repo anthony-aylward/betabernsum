@@ -52,7 +52,7 @@ def bbs_test(
             b,
             independent=independent
         )
-    if alternative == 'two_sided':
+    if alternative == 'two-sided':
         return min(1, 2 * min(lower_tail_area, upper_tail_area))
     elif alternative == 'greater':
         return upper_tail_area
