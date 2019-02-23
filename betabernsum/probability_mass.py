@@ -117,7 +117,7 @@ def integrand_dependent(t, k, n, a, b):
     Parameters
     ----------
     t
-        iterable of values on the domain of integration
+        value from the domain of integration
     k
         iterable giving the number of successes for each group
     n
@@ -134,12 +134,9 @@ def integrand_dependent(t, k, n, a, b):
     """
 
     assert len(k) == len(n) == len(a) == len(b)
-    return tuple(
-        prod(
-            evaluate_factor(t_i, k_j, n_j, a_j, b_j)
-            for k_j, n_j, a_j, b_j in zip(k, n, a, b)
-        )
-        for t_i in t
+    return prod(
+        evaluate_factor(t, k_j, n_j, a_j, b_j)
+        for k_j, n_j, a_j, b_j in zip(k, n, a, b)
     )
 
 
