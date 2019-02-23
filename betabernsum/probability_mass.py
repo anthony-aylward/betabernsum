@@ -209,5 +209,3 @@ def probability_mass_dependent(k, n, a, b):
         log_coefficient_dependent(k, n)
         + log_integral_dependent(k, n, a, b)
     )
-
-
