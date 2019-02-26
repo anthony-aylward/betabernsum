@@ -32,6 +32,13 @@ def bbs_test(
         iterable giving the first shape parameter for each group
     b
         iterable giving the second shape parameter for each group
+    alternative : str
+        alternative hypothesis {'less', 'greater', 'two-sided'}
+
+    Returns
+    -------
+    float
+        the p-value of the hypothesis test
     """
     
     lower_tail_area = bbs_cdf(
