@@ -148,7 +148,7 @@ log_coefficient_dependent <- function(x, size) {
 probability_mass_dependent <- function(x, size, shape1, shape2) {
   exp(
     sum(
-      log_coefficient_dependent(x, size, shape1, shape2),
+      log_coefficient_dependent(x, size),
       log_integral_dependent(x, size, shape1, shape2)
     )
   )
