@@ -36,6 +36,8 @@ bbs_test <- function(
   cores = 1,
   ...
 ) {
+  print(x)
+  print(size)
   lower_tail_area <- pbbs(
     q = x,
     size = size,
