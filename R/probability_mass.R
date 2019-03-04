@@ -53,7 +53,7 @@ probability_mass_independent <- function(
               x[[index]],
               size[[index]],
               shape1 = shape1[[index]],
-              shape2 = shape1[[index]]*(1-prob[[index]])/prob[[index]],
+              shape2 = shape1[[index]] * (1 - prob[[index]]) / prob[[index]],
               ...
             )
           }
@@ -124,18 +124,9 @@ log_integral_dependent <- function(x, size, shape1, shape2) {
 #'
 #' @param x vector giving the number of successes for each group.
 #' @param size vector giving the number of trials for each group.
-#' @param shape1,shape2 the two (positive) shape parameters of the standard
-#'   beta distribution. 
 #' @return numeric, the value of the log-coefficient.
 log_coefficient_dependent <- function(x, size) {
-  sum(
-    sapply(
-      1:length(x),
-      function(i) {
-        log(choose(size[[i]], x[[i]]))
-      }
-    )
-  )
+  sum(sapply(1:length(x), function(i) log(choose(size[[i]], x[[i]]))))
 }
 
 #' @title Probability mass for a bbs in the dependent case

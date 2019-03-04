@@ -15,7 +15,7 @@ log_integral_dependent(x, size, shape1, shape2)
 beta distribution.}
 }
 \value{
-numeric, the value of the evaluated integrand.
+numeric, the value of the evaluated integral.
 }
 \description{
 Logarithm of the integral component of probability mass
