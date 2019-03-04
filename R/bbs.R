@@ -132,7 +132,7 @@ pbbs <- function(
       if (any(tail > 83)) return(NA)
       as.integer(speed_flip) + (1 - 2 * speed_flip) * sum(
         unlist(
-          lapply(
+          mclapply(
             tail,
             function(x) {
               dbbs(
@@ -145,8 +145,8 @@ pbbs <- function(
                 independent = independent,
                 ...
               )
-            }
-            # mc.cores = cores
+            },
+            mc.cores = cores
           )
         )
       )
