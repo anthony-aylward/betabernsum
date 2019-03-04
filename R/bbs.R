@@ -144,7 +144,7 @@ pbbs <- function(
                 independent = independent,
                 ...
               )
-            }
+            },
             mc.cores = cores
           )
         )
