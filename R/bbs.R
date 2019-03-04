@@ -131,8 +131,8 @@ pbbs <- function(
       if (q_i > 83) return(NA)
       as.integer(speed_flip) + (1 - 2 * speed_flip) * sum(
         unlist(
-          lapply(
-            0:q_i,
+          mclapply(
+            tail,
             function(x) {
               dbbs(
                 x,
@@ -145,7 +145,7 @@ pbbs <- function(
                 ...
               )
             }
-            # mc.cores = cores
+            mc.cores = cores
           )
         )
       )
