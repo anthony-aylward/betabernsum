@@ -46,7 +46,9 @@ def bbs_pmf(k, n, a, b, independent=True):
         for coord in reg
     )
 
-def bbs_cdf(k, n, a, b, independent=True, processes=1):
+def bbs_cdf(
+    k, n, a, b, independent=True, processes=1, max_iter=32, graceful=False
+):
     """Cumulative distribution function for a sum of beta-bernoulli variables
 
     Parameters
@@ -62,6 +64,13 @@ def bbs_cdf(k, n, a, b, independent=True, processes=1):
     independent : bool
         If TRUE (default), assume a sum of two independent groups of variables.
         If FALSE, assume all variables are mutually dependent.
+    processes : int
+        number of processes to use
+    max_iter : int
+        maximum number of iterations
+    graceful
+        if True, return None when max_iter is exceeded, rather than raising an
+        error
 
     Returns
     -------
@@ -75,6 +84,12 @@ def bbs_cdf(k, n, a, b, independent=True, processes=1):
     else:
         speed_flip = True
         r = range(k + 1, n + 1)
+
+    if len(r) > max_iter:
+        if graceful:
+            return None
+        else:
+            raise RuntimeError('max iter exceeded')
 
     if processes == 1:
         return speed_flip + (1 - 2 * speed_flip) * sum(
