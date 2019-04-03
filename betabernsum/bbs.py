@@ -68,18 +68,22 @@ def bbs_cdf(k, n, a, b, independent=True, processes=1):
     float
         the value of the CDF
     """
+
+    if k <= n / 2:
+        speed_flip = False
+        r = range(k + 1)
+    else:
+        speed_flip = True
+        r = range(k + 1, n + 1)
+
     if processes == 1:
-        return sum(
-            map(
-                partial(bbs_pmf, n=n, a=a, b=b, independent=independent),
-                range(k + 1)
-            )
+        return speed_flip + (1 - 2 * speed_flip) * sum(
+            map(partial(bbs_pmf, n=n, a=a, b=b, independent=independent), r)
         )
     else:
-        with Pool(processes=processes) as pool:
-            return sum(
+        with Pool(processes=min(k + 1, processes)) as pool:
+            return speed_flip + (1 - 2 * speed_flip) * sum(
                 pool.map(
-                    partial(bbs_pmf, n=n, a=a, b=b, independent=independent),
-                    range(k + 1)
+                    partial(bbs_pmf, n=n, a=a, b=b, independent=independent), r
                 )
             )
