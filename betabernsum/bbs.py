@@ -78,7 +78,7 @@ def bbs_cdf(
         the value of the CDF
     """
 
-    if k <= n / 2:
+    if k <= sum(n) / 2:
         speed_flip = False
         r = range(k + 1)
     else:
