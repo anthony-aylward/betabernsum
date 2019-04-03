@@ -18,7 +18,9 @@ def bbs_test(
     b,
     independent=True,
     alternative='two-sided',
-    processes=1
+    processes=1,
+    max_iter=32,
+    graceful=False
 ):
     """Perform a hypothesis test using a BBS distribution
     
@@ -34,6 +36,13 @@ def bbs_test(
         iterable giving the second shape parameter for each group
     alternative : str
         alternative hypothesis {'less', 'greater', 'two-sided'}
+    processes : int
+        number of processes to use
+    max_iter : int
+        maximum number of iterations
+    graceful
+        if True, return None when max_iter is exceeded, rather than raising an
+        error
 
     Returns
     -------
@@ -42,7 +51,8 @@ def bbs_test(
     """
     
     lower_tail_area = bbs_cdf(
-        x, n, a, b, independent=independent, processes=processes
+        x, n, a, b, independent=independent, processes=processes,
+        max_iter=max_iter, graceful=graceful
     )
     if alternative == 'less':
         return lower_tail_area
