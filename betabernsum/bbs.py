@@ -83,7 +83,7 @@ def bbs_cdf(
         r = range(k + 1)
     else:
         speed_flip = True
-        r = range(k + 1, n + 1)
+        r = range(k + 1, sum(n) + 1)
 
     if len(r) > max_iter:
         if graceful:
