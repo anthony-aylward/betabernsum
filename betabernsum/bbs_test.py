@@ -42,22 +42,13 @@ def bbs_test(
     """
     
     lower_tail_area = bbs_cdf(
-        x,
-        n,
-        a,
-        b,
-        independent=independent,
-        processes=processes
+        x, n, a, b, independent=independent, processes=processes
     )
     if alternative == 'less':
         return lower_tail_area
     else:
         upper_tail_area = 1 - lower_tail_area + bbs_pmf(
-            x,
-            n,
-            a,
-            b,
-            independent=independent
+            x, n, a, b, independent=independent
         )
     if alternative == 'two-sided':
         return min(1, 2 * min(lower_tail_area, upper_tail_area))
