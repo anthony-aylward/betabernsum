@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='betabernsum',
-    version='0.0.17',
+    version='0.0.18',
     author='Anthony Aylward',
     author_email='aaylward@eng.ucsd.edu',
     description='Sums of beta-bernoulli random variables',
