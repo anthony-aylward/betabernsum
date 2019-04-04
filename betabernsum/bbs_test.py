@@ -19,7 +19,7 @@ def bbs_test(
     independent=True,
     alternative='two-sided',
     processes=1,
-    max_iter=64,
+    max_iter=float('inf'),
     graceful=False
 ):
     """Perform a hypothesis test using a BBS distribution
