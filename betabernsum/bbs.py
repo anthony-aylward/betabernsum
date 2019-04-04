@@ -96,7 +96,7 @@ def bbs_cdf(
             map(partial(bbs_pmf, n=n, a=a, b=b, independent=independent), r)
         )
     else:
-        with Pool(processes=min(k + 1, processes)) as pool:
+        with Pool(processes=min(len(r), processes)) as pool:
             return speed_flip + (1 - 2 * speed_flip) * sum(
                 pool.map(
                     partial(bbs_pmf, n=n, a=a, b=b, independent=independent), r
