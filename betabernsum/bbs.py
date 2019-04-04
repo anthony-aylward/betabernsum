@@ -40,7 +40,7 @@ def bbs_pmf(k, n, a, b, independent=True):
     """
 
     if isinstance(n, int) or (isinstance(n, (tuple, list)) and len(n) == 1):
-        reg = (k,)
+        reg = ((k,),)
     else:
         reg = region(k, n)
     return sum(
