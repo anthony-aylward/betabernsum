@@ -29,6 +29,7 @@ def prod(iterable):
     -------
     the product
     """
+    
     return reduce(mul, iterable, 1)
 
 
