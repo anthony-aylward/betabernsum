@@ -86,7 +86,7 @@ def bbs_cdf(
         r = range(k + 1)
     else:
         speed_flip = True
-        r = range(k + 1, sum(n) + 1)
+        r = range(sum(n) - k)
 
     if len(r) > max_iter:
         if graceful:
@@ -102,6 +102,6 @@ def bbs_cdf(
         with Pool(processes=min(len(r), processes)) as pool:
             return speed_flip + (1 - 2 * speed_flip) * sum(
                 pool.map(
-                    partial(bbs_pmf, n=n, a=a, b=b, independent=independent), r
+                    partial(bbs_pmf, n=n, a=b, b=a, independent=independent), r
                 )
             )

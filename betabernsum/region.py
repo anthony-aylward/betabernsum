@@ -21,7 +21,7 @@ def region(k, n):
         number of successes
     n
         iterable of integers, giving the number of trials for each group
-    
+
     Yields
     -------
     tuple
