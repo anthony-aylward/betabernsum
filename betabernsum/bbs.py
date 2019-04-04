@@ -53,7 +53,13 @@ def bbs_pmf(k, n, a, b, independent=True):
     )
 
 def bbs_cdf(
-    k, n, a, b, independent=True, processes=1, max_iter=float('inf'),
+    k,
+    n,
+    a,
+    b,
+    independent=True,
+    processes=1,
+    max_iter=float('inf'),
     graceful=False
 ):
     """Cumulative distribution function for a sum of beta-bernoulli variables
