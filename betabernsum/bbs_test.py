@@ -54,6 +54,8 @@ def bbs_test(
         x, n, a, b, independent=independent, processes=processes,
         max_iter=max_iter, graceful=graceful
     )
+    if lower_tail_area is None:
+        return None
     if alternative == 'less':
         return lower_tail_area
     else:
