@@ -39,6 +39,9 @@ def bbs_pmf(k, n, a, b, independent=True):
         the value of the PMF
     """
 
+    if k > sum(n) / 2:
+        k, a, b = sum(n) - k, b, a
+
     if isinstance(n, int) or (isinstance(n, (tuple, list)) and len(n) == 1):
         reg = ((k,),)
     else:
