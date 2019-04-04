@@ -39,7 +39,7 @@ def bbs_pmf(k, n, a, b, independent=True):
         the value of the PMF
     """
 
-    if isinstance(n, int) or (isinstance(n, (tuple, list) and len(n) == 1)):
+    if isinstance(n, int) or (isinstance(n, (tuple, list)) and len(n) == 1):
         reg = (k,)
     else:
         reg = region(k, n)
