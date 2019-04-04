@@ -39,7 +39,7 @@ def bbs_pmf(k, n, a, b, independent=True):
         the value of the PMF
     """
 
-    reg = region(k, n)
+    reg = (k,) if len(n) == 1 else region(k, n)
     return sum(
         probability_mass_independent(coord, n, a, b) if independent
         else probability_mass_dependent(coord, n, a, b)
