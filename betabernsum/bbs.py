@@ -22,7 +22,7 @@ def bbs_pmf(k, n, a, b, independent=True):
     Parameters
     ----------
     k
-        iterable giving the number of successes for each group
+        number of successes
     n
         iterable giving the number of trials for each group
     a
@@ -67,7 +67,7 @@ def bbs_cdf(
     Parameters
     ----------
     k
-        iterable giving the number of successes for each group
+        number of successes
     n
         iterable giving the number of trials for each group
     a
