@@ -8,7 +8,7 @@ from functools import reduce
 from math import exp, log
 from operator import mul
 from scipy.integrate import quad
-from scipy.misc import comb
+from scipy.special import comb
 from scipy.special import beta as beta_function
 from scipy.stats import beta
 
